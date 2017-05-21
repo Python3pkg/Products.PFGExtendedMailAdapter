@@ -39,8 +39,8 @@ PFGExtendedMailAdapterSchema = ATFolderSchema.copy() + formMailerAdapterSchema.c
         languageIndependent=True,
         storage=AnnotationStorage(),
         widget=MultiSelectionWidget(
-            label=_(u'E-mail Attachments'),
-            description=_(u'Please select the attachments to be sent with email.'),
+            label=_('E-mail Attachments'),
+            description=_('Please select the attachments to be sent with email.'),
             format='checkbox'),
         vocabulary='attachments',
         enforceVocabulary=True)))
@@ -64,8 +64,8 @@ class PFGExtendedMailAdapter(ATFolder, FormMailerAdapter):
         """Get header and body of e-mail as text (string)
         """
         (headerinfo, additional_headers, body) = self.get_header_body_tuple(fields, request, **kwargs)
-        if not isinstance(body, unicode):
-            body = unicode(body, self._site_encoding())
+        if not isinstance(body, str):
+            body = str(body, self._site_encoding())
         portal = getToolByName(self, 'portal_url').getPortalObject()
         email_charset = portal.getProperty('email_charset', 'utf-8')
         mime_text = MIMEText(body.encode(email_charset, 'replace'),
@@ -92,7 +92,7 @@ class PFGExtendedMailAdapter(ATFolder, FormMailerAdapter):
             outer = mime_text
 
         # write header
-        for key, value in headerinfo.items():
+        for key, value in list(headerinfo.items()):
             outer[key] = value
 
         # write additional header

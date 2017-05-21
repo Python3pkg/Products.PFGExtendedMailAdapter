@@ -8,7 +8,7 @@ from plone.app.testing import setRoles
 from plone.testing import layered
 from zope.testing import renormalizing
 
-import StringIO
+import io
 import doctest
 import manuel.codeblock
 import manuel.doctest
@@ -27,7 +27,7 @@ CHECKER = renormalizing.RENormalizing([
 
 
 def prink(e):
-    print eval('"""{0}"""'.format(str(e)))
+    print(eval('"""{0}"""'.format(str(e))))
 
 
 def setUp(self):
@@ -89,7 +89,7 @@ def setUp(self):
     })
     form.setActionAdapter(('adapter',))
     ## Add Image and File under adapter
-    dummy_image = StringIO.StringIO('Dummy Image')
+    dummy_image = io.StringIO('Dummy Image')
     adapter.invokeFactory(
         'Image',
         'dummy_image',
@@ -97,7 +97,7 @@ def setUp(self):
         image_file=dummy_image)
     dummy_image = adapter['dummy_image']
     dimage_uid = dummy_image.UID()
-    dummy_file = StringIO.StringIO('Dummy File')
+    dummy_file = io.StringIO('Dummy File')
     adapter.invokeFactory(
         'File',
         'dummy_file',

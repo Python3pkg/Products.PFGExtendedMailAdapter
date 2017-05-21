@@ -54,10 +54,10 @@ class TestPFGExtendedMailAdapter(unittest.TestCase):
         widget = field.widget
         from Products.Archetypes.public import SelectionWidget
         isinstance(widget, SelectionWidget)
-        self.assertEqual(widget.label, u'E-mail Attachments')
+        self.assertEqual(widget.label, 'E-mail Attachments')
         self.assertEqual(
             widget.description,
-            u'Please select the attachments to be sent with email.')
+            'Please select the attachments to be sent with email.')
         self.assertEqual(field.default, ())
         self.assertEqual(field.vocabulary, 'attachments')
         self.assertTrue(field.enforceVocabulary)
@@ -69,11 +69,11 @@ class TestPFGExtendedMailAdapter(unittest.TestCase):
         item.get_header_body_tuple = mock.Mock()
         headerinfo = {
             'From': '',
-            u'X-HTTP_X_FORWARDED_FOR': '',
-            u'X-REMOTE_ADDR': '',
+            'X-HTTP_X_FORWARDED_FOR': '',
+            'X-REMOTE_ADDR': '',
             'To': ' <recipient@abita.fi>',
             'Subject': '=?utf-8?q?Form_Submission?=',
-            u'X-PATH_INFO': '/plone/form',
+            'X-PATH_INFO': '/plone/form',
             'MIME-Version': '1.0'
         }
         body = '<html><head><title></title></head><body>Message</body></html>'
